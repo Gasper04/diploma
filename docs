@@ -1,0 +1,18 @@
+face orientation
+
+the F, R, B and L faces are orianted so their "top" is at the contact with the U face
+
+the U is orientet with B at its top
+
+the D is oriented with F at its top
+
+axis:
+
+X: L-R
+Y: D-U
+Z: B-F
+
+
+the solver and notation uses 1 based indexing for layers of the cube and rows and coloumns of the face
+the internal representation of faces is still 0 based but the viewing of the colouts is done trough a function
+that converts 1 based indexing of the solver to 0 based indexing of the cube

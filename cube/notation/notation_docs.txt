@@ -1,0 +1,45 @@
+smer poteze:
+smer poteze je določena z koncem notacije
+brez pomeni v smeri urinega kazalca
+' pomeni v nasprotni smeri urinega kazalca
+2 pomeni dvojni obrat (smer ni pomembna)
+
+direction je element množice { '', "'", '2' }
+
+face_char je element množice { F, B, R, L, U, D }
+
+axis_char je element množice { x, y, z }
+
+imamo 4 tipe potez
+
+Face:
+obrneš le zunanji nivo
+
+notacija: {face_char}{direction}
+
+primeri (F, R' U2, B')
+
+Wide:
+
+obrneš zgornjih k nivojev
+
+notacija: {k}{face_char}w{direction}
+
+primeri (3Fw, 2Rw', 4Bw2)
+
+Slice:
+
+obrneš le en (k-ti) notranji nivo
+
+notacija: {k}{face_char}{direction}
+
+primeri (2E, 3M', 4S2)
+
+Rotation:
+
+kocko obrneš v smeri X, Y, ali Z osi
+*smer obrata je za X enaka kot pri R, za Y enaka kot pri U, za Z enaka kot pri F
+
+notacija {axis_char}{direction}
+
+primeri (x, y', z2)

@@ -1,0 +1,45 @@
+korak 1 - bel center
+
+sestavim ga po stolpcih na zgornji stranici
+
+stolpce gradim od zgoraj navzdol (B to F) in prvi stolpec je na levi strani(L)
+
+dodati je treba koščke od [2:n-1, 2:n-1]
+
+poišči beli koščk (i, j)
+če je košček že na pravem mestu
+    continue
+sicer
+    izberi enega od koščkov na voljo po naslednji prioriteti glede strani
+    (R, F, B, L, U, D)
+    premakni ga na stran R
+    obrni ga da je na poziciji (i, j) na strani R
+    vstavi ga z {j}L {i}U {j}L'
+
+
+korak 2 - rumen center
+
+poišči rumen koščk (i, j)
+če je košček že na pravem mestu
+    continue
+sicer
+    izberi enega od koščkov na voljo po naslednji prioriteti glede strani
+    (R, F, B, L, D)
+    premakni ga na stran R
+    obrni ga da je na poziciji (i, j) na strani R
+
+    vstavljanje: {j}L' B* {i}U B** {j}L
+    * obrat v tako smer, da beli stolpec ni v isti vrstici kot je košček ki ga vtavljamo tj {i}
+    ** obrat v obratno smer kot prej
+
+korak 3 - ostali centri s komutatorji
+
+
+korak 4 - robovi (do zadnjih dveh)
+
+
+korak 5 - zadnja dva robova
+
+korak 6 - parity
+
+korak 7 - reši kot 3x3
