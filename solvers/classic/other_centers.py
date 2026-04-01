@@ -4,14 +4,12 @@ from cube.face import Face
 from cube.move import Move, MoveType
 from cube.sequence import Sequence
 from display.viewer import Viewer
-from solvers.helpers.locator import find_piece_locations
+from solvers.helpers.center_piece import find_piece_locations, CenterPiece, Color
 from solvers.helpers.comutator import comutate_center_pieces
 from solvers.helpers.orient import orient
 
 
-
 def solve_other_centers(cube: Cube):
-
     _cube = cube.copy()
     moves = Sequence()
     orient_seq = orient(cube)
@@ -36,9 +34,6 @@ def solve_other_centers(cube: Cube):
     return moves
 
 
-
-
-
 def solve_center(face: Face, cube: Cube):
     _cube = cube.copy()
     moves = Sequence()
@@ -50,32 +45,37 @@ def solve_center(face: Face, cube: Cube):
             if best_piece is None:
                 continue
             piece_solution.extend(rotate_piece(best_piece, i, j, _cube.n))
-            piece_solution.extend(comutate_center_pieces(i, j, best_piece[0], _cube.n))
+            piece_solution.extend(comutate_center_pieces(i, j, best_piece.face, _cube.n))
             _cube.apply_sequence(piece_solution)
             moves.extend(piece_solution)
     return moves
 
+
 def find_best_piece(cube: Cube, i, j, face):
-    pieces = find_piece_locations(cube, color=face.value, i=i, j=j)
+    color = Color(face.value)
+    piece = CenterPiece(color=color, face=None, i=i, j=j)
+    pieces = find_piece_locations(cube, piece)
     best_piece = None
-    if (Face.F, i, j) in pieces:
-        return None
     for piece in pieces:
-        if piece[0] in [Face.R, Face.B, Face.L]:
+        if piece == CenterPiece(color=color, face=Face.F, i=i, j=j):
+            return None
+    for piece in pieces:
+        if piece.face in [Face.R, Face.B, Face.L]:
             best_piece = piece
             break
     return best_piece
 
+
 def rotate_piece(piece, end_i, end_j, n):
     seq = Sequence()
     r = 0
-    i0 = piece[1]
-    j0 = piece[2]
+    i0 = piece.i
+    j0 = piece.j
     while not(i0 == end_i and j0 == end_j):
         r += 1
         i = j0
         j = n + 1 - i0
         i0, j0 = i, j
     if r != 0:
-        seq.append(Move(MoveType.FACE, face=piece[0], turns=r))
+        seq.append(Move(MoveType.FACE, face=piece.face, turns=r))
     return seq

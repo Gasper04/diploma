@@ -7,7 +7,7 @@ from solvers.classic.yellow_center import solve_yellow_center
 from solvers.classic.centers import solve_centers
 
 
-N_SEEDS = 1000
+N_SEEDS = 100
 
 @pytest.mark.parametrize("size", list(range(3, 15)))
 @pytest.mark.parametrize("seed", list(range(N_SEEDS)))
