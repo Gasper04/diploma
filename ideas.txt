@@ -34,12 +34,24 @@ sicer
 
 korak 3 - ostali centri s komutatorji
 
+poišči koššček
+ga zarotiraj
+izvedi komutator
 
-korak 4 - robovi (do zadnjih dveh)
+
+korak 4 - robovi
+za vsak rob:
+    poišči košček robu n//2 + 1 (komutator na sredinskih edge-ih ne deluje zato ta košček sestavimo takoj)
+    prestavimo ga tako da je na levi strani sprednje ploskve
+    za i od 2 do (n-1)
+        poišči i-ti košček robu
+        če je že na mestu -> pass
+        če je na pravem robu a na napačnem mestu -> komutator za obračanje
+        sicer
+            vstavi košček na desno stran sprednje ploskve brez da premakneš rob ki ga sestavljaš
+            izvedi algoritem za vstavljanje
 
 
-korak 5 - zadnja dva robova
+korak 5 - parity
 
-korak 6 - parity
-
-korak 7 - reši kot 3x3
+korak 6 - reši kot 3x3

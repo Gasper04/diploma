@@ -11,6 +11,7 @@ def orient(cube: Cube):
         return Sequence()
     moves = Sequence()
     i = (cube.n + 1) // 2
+    _cube = cube.copy()
 
 
     #white top
@@ -25,12 +26,14 @@ def orient(cube: Cube):
     elif cube.get(Face.D, i, i) == Face.U.value:
         moves.append(Move(MoveType.ROTATION, axis=Axis.X, turns=2))
 
+    _cube.apply_sequence(moves)
+
     #green front
-    if cube.get(Face.R, i, i) == Face.F.value:
+    if _cube.get(Face.R, i, i) == Face.F.value:
         moves.append(Move(MoveType.ROTATION, axis=Axis.Y, turns=1))
-    elif cube.get(Face.B, i, i) == Face.F.value:
+    elif _cube.get(Face.B, i, i) == Face.F.value:
         moves.append(Move(MoveType.ROTATION, axis=Axis.Y, turns=2))
-    elif cube.get(Face.L, i, i) == Face.F.value:
+    elif _cube.get(Face.L, i, i) == Face.F.value:
         moves.append(Move(MoveType.ROTATION, axis=Axis.Y, turns=3))
     
     return moves

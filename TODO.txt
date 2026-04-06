@@ -1,0 +1,5 @@
+edge piece locator
+
+edge movement into place
+
+piece comutator

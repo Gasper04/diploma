@@ -5,7 +5,7 @@ from cube.move import Move, MoveType
 from cube.sequence import Sequence
 from display.viewer import Viewer
 from solvers.helpers.center_piece import find_piece_locations, CenterPiece, Color
-from solvers.helpers.comutator import comutate_center_pieces
+from solvers.helpers.comutators import comutate_center_pieces
 from solvers.helpers.orient import orient
 
 
