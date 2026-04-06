@@ -7,10 +7,11 @@ from cube.cube import Cube
 
 
 def orient(cube: Cube):
-    if cube.n % 2 == 0:
-        return Sequence()
     moves = Sequence()
-    i = (cube.n + 1) // 2
+    if cube.n % 2 == 0:
+        i = cube.n//2
+    else:
+        i = (cube.n + 1) // 2
     _cube = cube.copy()
 
 

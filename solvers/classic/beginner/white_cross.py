@@ -16,7 +16,7 @@ class WhiteCrossSolver:
         self.cube = reduce(cube)
         self.moves = Sequence()
 
-    def solve_white_cross(self, cube: Cube) -> Sequence:
+    def solve_white_cross(self) -> Sequence:
         rotation = Move(MoveType.ROTATION, axis=Axis.Z, turns=2)
         self.cube.apply_move(rotation)
         self.moves.append(rotation)

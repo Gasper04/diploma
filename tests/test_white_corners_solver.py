@@ -5,15 +5,15 @@ from cube.scramble import generate_scramble
 from solvers.classic.white_center import solve_white_center
 from solvers.classic.yellow_center import solve_yellow_center
 from solvers.classic.beginner.white_cross import WhiteCrossSolver
+from solvers.classic.beginner.white_corners import WhiteCornersSolver
 from solvers.helpers.orient import orient
 from display.viewer import Viewer
-
 
 
 N_SEEDS = 1000
 
 @pytest.mark.parametrize("seed", list(range(N_SEEDS)))
-def test_white_cross(seed):
+def test_white_corners(seed):
     size = 3
     cube = Cube(size)
     scramble = generate_scramble(size, relative_length=1, seed=seed)
@@ -22,21 +22,16 @@ def test_white_cross(seed):
     wcs = WhiteCrossSolver(cube)
     moves = wcs.solve_white_cross()
     cube.apply_sequence(moves)
+    wcrs = WhiteCornersSolver(cube)
+    moves = wcrs.solve_white_corners()
+    cube.apply_sequence(moves)
     cube.apply_sequence(orient(cube))
-    assert cube.get(Face.F, 2, 2) == Face.F.value
-    assert cube.get(Face.F, 1, 2) == Face.F.value
-
-    assert cube.get(Face.R, 2, 2) == Face.R.value
-    assert cube.get(Face.R, 1, 2) == Face.R.value
-
-    assert cube.get(Face.B, 2, 2) == Face.B.value
-    assert cube.get(Face.B, 1, 2) == Face.B.value
-
-    assert cube.get(Face.L, 2, 2) == Face.L.value
-    assert cube.get(Face.L, 1, 2) == Face.L.value
-
-    assert cube.get(Face.U, 2, 2) == Face.U.value
-    assert cube.get(Face.U, 1, 2) == Face.U.value
-    assert cube.get(Face.U, 2, 1) == Face.U.value
-    assert cube.get(Face.U, 2, 3) == Face.U.value
-    assert cube.get(Face.U, 3, 2) == Face.U.value
+    for x in range(3):
+        for y in range(3):
+            assert cube.get(Face.U, x, y) == Face.U.value
+    
+    for face in (Face.F, Face.R, Face.B, Face. L):
+        assert cube.get(face, 2, 2) == face.value
+        assert cube.get(face, 1, 1) == face.value
+        assert cube.get(face, 1, 2) == face.value
+        assert cube.get(face, 1, 3) == face.value
